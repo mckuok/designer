@@ -1,0 +1,107 @@
+<form [formGroup]="bioForm" novalidate (ngSubmit)="save(bioForm.value)" class="ui form">
+
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="middle aligned column">
+        <h4 class="ui header">Activities</h4>
+      </div>
+
+      <div class="right aligned column">
+        <button type="submit" class="blue ui  button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="middle aligned column">
+        <div *ngFor="let page of pagination; let i=index" class="ui pagination menu" style="font-size: 0.7rem">
+          <a class="active item" (click)="selectPage(i)">
+            {{ page }}
+          </a>
+        </div>
+      </div>
+
+      <div class="left aligned column">
+        <a class="ui blue right ribbon large label"
+           (click)="addEntry(bioForm.controls['volunteer'], 'volunteer')">
+          <i class="add square icon"></i> Add a new activity
+        </a>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+  <div formArrayName="volunteer">
+    <div *ngFor="let volunteer1 of bioForm.controls['volunteer'].controls; let i=index">
+      <div *ngIf="shouldDisplay[i]" class="ui segment">
+
+        <a class="ui red right corner label" (click)="removeEntry(bioForm.controls['volunteer'], i)">
+          <i class="minus square icon" (click)="removeEntry(bioForm.controls['volunteer'], i)"></i>
+        </a>
+
+        <div [formGroupName]="i" class="field">
+          <label>Organization</label>
+          <input type="text" formControlName="organization">
+        </div>
+        <div [formGroupName]="i" class="field">
+          <label>Website</label>
+          <input type="text" formControlName="website">
+        </div>
+        <div [formGroupName]="i" class="field">
+          <label>Position</label>
+          <input type="text" formControlName="position">
+        </div>
+        <div [formGroupName]="i" class="field">
+          <label>Start Date</label>
+          <input type="text" formControlName="startDate">
+        </div>
+        <div [formGroupName]="i" class="field">
+          <label>End Date</label>
+          <input type="text" formControlName="endDate">
+        </div>
+        <div [formGroupName]="i" class="field">
+          <label>Experience Summary</label>
+          <textarea formControlName="summary" rows="4"></textarea>
+        </div>
+        <div [formGroupName]="i" class="field">
+          <div class="ui grid">
+            <div class="two column row">
+              <div class="middle aligned column">
+                <label><strong>Highlights</strong></label>
+              </div>
+
+              <div class="right aligned column">
+                <i class="blue add square large icon" style="cursor: pointer"
+                   (click)="addEntry(bioForm.controls['volunteer'].controls[i].controls['highlights'], 'highlights')"></i>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div formArrayName="highlights">
+            <div
+              *ngFor="let highlight of bioForm.controls['volunteer'].controls[i].controls['highlights'].controls; let j=index">
+
+              <div class="ui segment">
+                <a class="ui red right corner label"
+                   (click)="removeEntry(bioForm.controls['volunteer'].controls[i].controls['highlights'], j)">
+                  <i class="minus square icon"
+                     (click)="removeEntry(bioForm.controls['volunteer'].controls[i].controls['highlights'], j)"></i>
+                </a>
+
+                <div class="field">
+                <textarea [formControlName]="j" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

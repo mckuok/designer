@@ -1,0 +1,86 @@
+<div class="ui list">
+  <div class="item">
+    <i class="folder open outline icon"></i>
+    <div class="content">
+      <div class="header">{{ repoName }}</div>
+      <div class="list">
+        <div class="item">
+          <i class="folder open outline icon"></i>
+          <div class="content">
+            <div class="header">essays</div>
+            <div class="list">
+              <div *ngFor="let file of essays; let i=index" class="item" (click)="openModal('essay', file)">
+                <i class="file text outline icon"></i>
+                <div class="content">
+                  <div class="header">{{ file }}</div>
+                </div>
+              </div>
+              <div class="item">
+                <i class="write icon"></i>
+                <div class="content">
+                  <div class="header"> New Essay </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="folder open outline icon"></i>
+          <div class="content">
+            <div class="header">projects</div>
+            <div class="list">
+              <div *ngFor="let file of projects; let i=index" class="item">
+                <i class="file text outline icon"></i>
+                <div class="content">
+                  <div class="header">{{ file }}</div>
+                </div>
+              </div>
+              <div class="item">
+                <i class="write icon"></i>
+                <div class="content">
+                  <div class="header"> New Project </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="folder open outline icon"></i>
+          <div class="content">
+            <div class="header">images</div>
+            <div class="list">
+              <div *ngFor="let file of images; let i=index" class="item">
+                <i class="file image outline icon"></i>
+                <div class="content">
+                  <div class="header">{{ file }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="ui fullscreen modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Profile Picture
+  </div>
+  <div class="content">
+    <!--<a class="item" [routerLink]="[{ outlets: { writing: 'dashboard/writing/essay' } }]" [queryParams]="{ file: abc }" routerLinkActive="active">Basic</a>-->
+    <router-outlet name="writing"></router-outlet>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Nope
+    </div>
+    <div class="ui positive right labeled icon button">
+      Yep, that's me
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+

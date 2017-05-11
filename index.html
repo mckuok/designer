@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Designer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <script src="systemjs.config.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+
+    <meta http-Equiv="Cache-Control" Content="no-cache" />
+    <meta http-Equiv="Pragma" Content="no-cache" />
+    <meta http-Equiv="Expires" Content="0" />
+
+    <script>
+      let electron = require('electron');
+      let fs = require('fs');
+      let child_process = require('child_process');
+      let path = require('path');
+      let marked = require('marked');
+      let _$ = $;
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+    <base href="/">
+
+  </head>
+
+  <body>
+
+      <my-app>
+
+        <div style="height: 100%;" class="ui two column centered middle aligned grid ">
+
+          <div class="column">
+
+            <div class="ui fluid centered container">
+
+              <div class="center aligned content">
+                <div class="ui left aligned huge header"> Designer </div>
+                <div class="ui right aligned large header">Your GUI for building your Techfolio </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </my-app>
+
+  </body>
+</html>

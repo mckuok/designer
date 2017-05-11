@@ -1,0 +1,89 @@
+<form [formGroup]="bioForm" novalidate (ngSubmit)="save(bioForm.value)" class="ui form">
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="middle aligned column">
+        <h4 class="ui header">Interests</h4>
+      </div>
+
+      <div class="right aligned column">
+        <button type="submit" class="blue ui  button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="middle aligned column">
+        <div *ngFor="let page of pagination; let i=index" class="ui pagination menu" style="font-size: 0.7rem">
+          <a class="active item" (click)="selectPage(i)">
+            {{ page }}
+          </a>
+        </div>
+      </div>
+
+      <div class="left aligned column">
+        <a class="ui blue right ribbon large label"
+           (click)="addEntry(bioForm.controls['interests'], 'interests')">
+          <i class="add square icon"></i> Add a new interest
+        </a>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+  <div formArrayName="interests">
+
+    <div *ngFor="let interest of bioForm.controls['interests'].controls; let i=index" >
+      <div *ngIf="shouldDisplay[i]" class="ui segment">
+        <a class="ui red right corner label" (click)="removeEntry(bioForm.controls['interests'], i)">
+          <i class="minus square icon" (click)="removeEntry(bioForm.controls['interests'], i)"></i>
+        </a>
+
+        <div [formGroupName]="i" class="field">
+          <label>Name</label>
+          <input type="text" formControlName="name">
+        </div>
+
+        <div [formGroupName]="i" class="field">
+
+
+          <div class="ui grid">
+            <div class="two column row">
+              <div class="middle aligned column">
+                <label><strong>Keywords</strong></label>
+              </div>
+
+              <div class="right aligned column">
+                <i class="blue add square large icon"  style="cursor: pointer"
+                   (click)="addEntry(bioForm.controls['interests'].controls[i].controls['keywords'], 'keywords')"></i>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div formArrayName="keywords">
+
+            <div
+              *ngFor="let keyword of bioForm.controls['interests'].controls[i].controls['keywords'].controls; let j=index">
+              <div class="ui segment">
+                <a class="ui red right corner label"
+                   (click)="removeEntry(bioForm.controls['interests'].controls[i].controls['keywords'], j)">
+                  <i class="minus square icon"
+                     (click)="removeEntry(bioForm.controls['interests'].controls[i].controls['keywords'], j)"></i>
+                </a>
+
+                <div class="field">
+                  <input type="text" [formControlName]="j">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

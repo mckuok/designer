@@ -1,0 +1,134 @@
+<form [formGroup]="bioForm" novalidate (ngSubmit)="save(bioForm.value)" class="ui form">
+  <div class="ui grid">
+    <div class="three column row">
+      <div class="middle aligned column">
+        <h4 class="ui header">Basic Information</h4>
+      </div>
+      <div class="center aligned column">
+        <div *ngFor="let page of pagination; let i=index" class="ui pagination menu" style="font-size: 0.7rem">
+          <a class="active item" (click)="selectPage(i)">
+            {{ page }}
+          </a>
+        </div>
+
+      </div>
+      <div class="right aligned column">
+        <button type="submit" class="blue ui  button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div *ngIf="shouldDisplay[0]">
+    <div class="three fields">
+      <div formGroupName="basics" class="field">
+        <label>Name</label>
+        <input type="text" formControlName="name">
+      </div>
+      <div formGroupName="basics" class="field">
+        <label>Label</label>
+        <input type="text" formControlName="label">
+      </div>
+      <div formGroupName="basics" class="field">
+        <label>Picture</label>
+        <input type="text" formControlName="picture">
+      </div>
+
+    </div>
+
+    <div class="two fields">
+      <div formGroupName="basics" class="field">
+        <label>Email</label>
+        <input type="text" formControlName="email">
+      </div>
+      <div formGroupName="basics" class="field">
+        <label>Website</label>
+        <input type="text" formControlName="website">
+      </div>
+    </div>
+
+    <div formGroupName="basics" class="field">
+      <label>Summary</label>
+      <textarea type="text" formControlName="summary" rows="5"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Address</label>
+      <div formGroupName="basics">
+        <div formGroupName="location">
+          <input type="text" formControlName="address" placeholder="Address">
+        </div>
+      </div>
+    </div>
+
+    <div class="four fields">
+      <div formGroupName="basics" class="field">
+        <div formGroupName="location">
+          <input type="text" formControlName="city" placeholder="City">
+        </div>
+      </div>
+      <div formGroupName="basics" class="field">
+        <div formGroupName="location">
+          <input type="text" formControlName="region" placeholder="Region">
+        </div>
+      </div>
+      <div formGroupName="basics" class="field">
+        <div formGroupName="location">
+          <input type="text" formControlName="countryCode" placeholder="Country">
+        </div>
+      </div>
+      <div formGroupName="basics" class="field">
+        <div formGroupName="location">
+          <input type="text" formControlName="postalCode" placeholder="Postal Code">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="shouldDisplay[1]"></div>
+
+  <div *ngIf="selectedPage > 0"formGroupName="basics" class="ui container">
+
+    <div class="ui grid">
+      <div class="two column row">
+        <div class="middle aligned column">
+          <h4 class="ui header">Network Information</h4>
+        </div>
+
+        <div class="left aligned column">
+          <a class="ui blue right ribbon large label"
+             (click)="addEntry(bioForm.controls.basics.controls.profiles, 'profiles')">
+            <i class="add square icon"></i> Add a new network
+          </a>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div formArrayName="profiles">
+      <div *ngFor="let profile of bioForm.controls.basics.controls.profiles.controls; let i=index">
+        <div class="ui segment" *ngIf="shouldDisplay[i + 2]">
+          <a class="ui red right corner label" (click)="removeEntry(bioForm.controls.basics.controls.profiles, i)">
+            <i class="minus square icon" (click)="removeEntry(bioForm.controls.basics.controls.profiles, i)"></i>
+          </a>
+
+          <div class="two fields">
+            <div [formGroupName]="i" class="field">
+              <label>Network</label>
+              <input type="text" formControlName="network">
+            </div>
+
+            <div [formGroupName]="i" class="field">
+              <label>Account / User Name</label>
+              <input type="text" formControlName="username">
+            </div>
+          </div>
+
+          <div [formGroupName]="i" class="field">
+            <label>URL</label>
+            <input type="text" formControlName="url">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

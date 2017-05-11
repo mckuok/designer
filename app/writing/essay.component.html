@@ -1,0 +1,37 @@
+<h5> Essay </h5>
+<p> Previous Essays: </p>
+<ul>
+  <li *ngFor="let file of previousWritings; let i=index">
+    <button type="button" (click)="loadEssay(i)">{{ file }}</button> <button type="button" (click)="deleteWriting(i)"> Delete </button>
+  </li>
+  <li><button type="button" (click)="buildNewForm()"> New Essay </button></li>
+</ul>
+
+<form [formGroup]="writingForm" novalidate (ngSubmit)="save(writingForm.value)">
+  <label> Title </label>
+  <input type="text" formControlName="title">
+  <br>
+
+  <label> Date </label>
+  <input type="text" formControlName="date">
+
+  <div formArrayName="labels">
+    <button type="button" (click)="addLabel()"> Add </button>
+    <div *ngFor="let label of writingForm.controls['labels'].controls; let i=index">
+      <label>Label</label>
+      <input type="text" [formControlName]="i">
+      <button type="button" (click)="removeLabel(i)"> Remove </button>
+    </div>
+  </div>
+
+  <label>Upload Images</label>
+  <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload image file..." />
+  {{ fileUploadStatus }}
+  <br>
+  <textarea formControlName="content"></textarea>
+  <br>
+  <button type="submit"> Save </button>
+</form>
+
+<div [innerHTML]="preview | sanitizeHtml">
+</div>

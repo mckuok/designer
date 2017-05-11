@@ -1,0 +1,57 @@
+<form [formGroup]="bioForm" novalidate (ngSubmit)="save(bioForm.value)" class="ui form">
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="middle aligned column">
+        <h4 class="ui header">References</h4>
+      </div>
+
+      <div class="right aligned column">
+        <button type="submit" class="blue ui  button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="middle aligned column">
+        <div *ngFor="let page of pagination; let i=index" class="ui pagination menu" style="font-size: 0.7rem">
+          <a class="active item" (click)="selectPage(i)">
+            {{ page }}
+          </a>
+        </div>
+      </div>
+
+      <div class="left aligned column">
+        <a class="ui blue right ribbon large label"
+           (click)="addEntry(bioForm.controls['references'], 'references')">
+          <i class="add square icon"></i> Add a new reference
+        </a>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+
+  <div formArrayName="references">
+    <div *ngFor="let reference of bioForm.controls['references'].controls; let i=index">
+      <div *ngIf="shouldDisplay[i]" class="ui segment">
+
+        <a class="ui red right corner label" (click)="removeEntry(bioForm.controls['references'], i)">
+          <i class="minus square icon" (click)="removeEntry(bioForm.controls['references'], i)"></i>
+        </a>
+      <div [formGroupName]="i" class="field">
+        <label>Name</label>
+        <input type="text" formControlName="name">
+      </div>
+      <div [formGroupName]="i" class="field">
+        <label>Reference Contact</label>
+        <input type="text" formControlName="reference">
+      </div>
+    </div>
+  </div>
+
+  </div>
+</form>

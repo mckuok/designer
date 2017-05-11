@@ -1,0 +1,40 @@
+<div class="ui left vertical menu visible inverted sidebar">
+  <p class="item"><img class="ui tiny avatar image" [src]=" avatar | safe">
+    <span> {{ username }}</span></p>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/basic' } }]" routerLinkActive="active">Basic
+    Information</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/interest' } }]"
+     routerLinkActive="active">Interests</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/skill' } }]" routerLinkActive="active">Skills</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/education' } }]"
+     routerLinkActive="active">Education</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/work' } }]" routerLinkActive="active">Work</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/volunteer' } }]" routerLinkActive="active">Activities</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/award' } }]" routerLinkActive="active">Awards</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/reference' } }]" routerLinkActive="active">References</a>
+  <a class="item" [routerLink]="[{ outlets: { dashboard: 'dashboard/writing' } }]"
+     routerLinkActive="active">Writings</a>
+</div>
+
+<div class="pusher">
+  <div class="ui equal height grid" style="height: 100%;">
+    <div class="seven wide stretched column">
+      <div class="ui segment">
+
+
+        <h1 class="ui left floated header">Designer</h1>
+        <button (click)="pushLive()" class="ui positive right floated right labeled icon button">
+          <i class="right arrow icon"></i>
+          Push Live
+        </button>
+
+        <div class="ui clearing divider"></div>
+
+        <router-outlet name="dashboard"></router-outlet>
+      </div>
+    </div>
+    <div class="nine wide stretched column" [style.height.px]="windowHeight">
+      <iframe [src]="liveUrl| safe" style="height: 100%; width: 100%" scrolling="yes"></iframe>
+    </div>
+  </div>
+</div>
